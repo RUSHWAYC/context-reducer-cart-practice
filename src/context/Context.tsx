@@ -21,6 +21,7 @@ const Context = ({ children }: ContextProps) => {
     price: faker.commerce.price(100, 200, 0),
     image: faker.image.imageUrl(640, 480, `${faker.commerce.product()}`),
     inStock: faker.random.numeric(1, {
+      allowLeadingZeros: true,
       bannedDigits: ["1", "2", "4", "7", "8", "9"],
     }),
     fastDelivery: faker.datatype.boolean(),
