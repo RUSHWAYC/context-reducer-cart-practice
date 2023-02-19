@@ -15,7 +15,7 @@ export interface CartState {
 
 export interface CartAction {
   type: "ADD_TO_CART" | "REMOVE_FROM_CART";
-  payload: Product | string;
+  payload: Product;
 }
 
 export interface CartContextType {
