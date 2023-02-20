@@ -1,10 +1,21 @@
 import { createContext, ReactNode, useContext, useReducer } from "react";
 import { faker } from "@faker-js/faker";
-import { cartReducer } from "./Reducers";
-import { CartContextType } from "./types";
+import { cartReducer, filterReducer } from "./Reducers";
+import { CartContextType, FilterContextType } from "./types";
 
 const Cart = createContext<CartContextType>({
   state: { products: [], cart: [] },
+  dispatch: () => {},
+});
+
+const Filter = createContext<FilterContextType>({
+  state: {
+    sort: false,
+    byStock: false,
+    byFastDelivery: false,
+    byRating: 0,
+    searchQuery: "",
+  },
   dispatch: () => {},
 });
 
@@ -36,11 +47,29 @@ const Context = ({ children }: ContextProps) => {
     cart: [],
   });
 
-  return <Cart.Provider value={{ state, dispatch }}>{children}</Cart.Provider>;
+  const [filterState, filterDispatch] = useReducer(filterReducer, {
+    sort: false,
+    byStock: false,
+    byFastDelivery: false,
+    byRating: 0,
+    searchQuery: "",
+  });
+
+  return (
+    <Cart.Provider value={{ state, dispatch }}>
+      <Filter.Provider value={{ state: filterState, dispatch: filterDispatch }}>
+        {children}
+      </Filter.Provider>
+    </Cart.Provider>
+  );
 };
 
 export const CartState = (): CartContextType => {
   return useContext(Cart);
+};
+
+export const FilterState = (): FilterContextType => {
+  return useContext(Filter);
 };
 
 export default Context;

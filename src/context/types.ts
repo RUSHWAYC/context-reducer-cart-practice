@@ -23,3 +23,29 @@ export interface CartContextType {
   state: CartState;
   dispatch: React.Dispatch<CartAction>;
 }
+
+//If these are not "any" all hell breaks loose in Context.tsx
+export interface FilterState {
+  sort: any;
+  byStock: boolean;
+  byFastDelivery: boolean;
+  byRating: any;
+  searchQuery: any;
+}
+
+//If payload is not optional and | string the app breaks.
+export interface FilterAction {
+  type:
+    | "SORT_BY_PRICE"
+    | "FILTER_BY_STOCK"
+    | "FILTER_BY_DELIVERY"
+    | "FILTER_BY_RATING"
+    | "FILTER_BY_SEARCH"
+    | "CLEAR_FILTERS";
+  payload?: FilterState | string;
+}
+
+export interface FilterContextType {
+  state: FilterState;
+  dispatch: React.Dispatch<FilterAction>;
+}
