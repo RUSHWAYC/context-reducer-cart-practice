@@ -28,6 +28,7 @@ const Context = ({ children }: ContextProps) => {
     ratings: faker.random.numeric(1, {
       bannedDigits: ["0", "6", "7", "8", "9"],
     }),
+    qty: 1,
   }));
 
   const [state, dispatch] = useReducer(cartReducer, {
@@ -38,7 +39,7 @@ const Context = ({ children }: ContextProps) => {
   return <Cart.Provider value={{ state, dispatch }}>{children}</Cart.Provider>;
 };
 
-export const CartState = () => {
+export const CartState = (): CartContextType => {
   return useContext(Cart);
 };
 

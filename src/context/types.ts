@@ -6,6 +6,7 @@ export interface Product {
   inStock: string;
   fastDelivery: boolean;
   ratings: string;
+  qty: number;
 }
 
 export interface CartState {
@@ -14,7 +15,7 @@ export interface CartState {
 }
 
 export interface CartAction {
-  type: "ADD_TO_CART" | "REMOVE_FROM_CART";
+  type: "ADD_TO_CART" | "REMOVE_FROM_CART" | "CHANGE_CART_QTY";
   payload: Product;
 }
 
